@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -12,6 +13,25 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: bar
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: another-really-really-really-really-really-really-long-name
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/glasser/argo-local-dev-test.git'
+    path: bar
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: barf
   syncPolicy:
     automated: {}
     syncOptions:
